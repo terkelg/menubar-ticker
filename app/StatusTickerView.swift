@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct StatusTickerView: View {
-    @ObservedObject var session: TickerSession
+    let session: TickerSession
 
     var body: some View {
         TickerLabel(

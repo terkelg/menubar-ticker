@@ -8,8 +8,39 @@ struct TickerTextTests {
     }
 
     @Test
+    func keepsOneRow() {
+        #expect(TickerText.rows([]) == [TickerText.fallback])
+    }
+
+    @Test
     func fallsBackWhenBlank() {
         #expect(TickerText.value(" \n ") == TickerText.fallback)
+    }
+
+    @Test
+    func joinsRowsInOrder() {
+        #expect(TickerText.value([" first ", "second", " third "]) == "first • second • third")
+    }
+
+    @Test
+    func dropsBlankRows() {
+        #expect(TickerText.value(["first", " \n ", "second"]) == "first • second")
+    }
+
+    @Test
+    func dropsEdgeBlankRows() {
+        #expect(TickerText.rows(["", "first", ""]) == ["first"])
+    }
+
+    @Test
+    func fallsBackWhenRowsAreBlank() {
+        #expect(TickerText.value([" \n ", ""]) == TickerText.fallback)
+    }
+
+    @Test
+    func normalizesRowsIdempotently() {
+        let rows = TickerText.rows(["", "first", "", "second", ""])
+        #expect(TickerText.rows(rows) == rows)
     }
 
     @Test
@@ -18,13 +49,18 @@ struct TickerTextTests {
     }
 
     @Test
-    func appendsDotToFallback() {
-        #expect(TickerText.loop(" \n ") == "\(TickerText.fallback)\(TickerText.dot)")
+    func appendsDotToRows() {
+        #expect(TickerText.loop(["first", "second"]) == "first • second • ")
     }
 
     @Test
-    func fallsBackWhenRateIsUnknown() {
-        #expect(TickerText.rate(9) == TickerText.rateRange.upperBound)
+    func appendsDotToFallbackRows() {
+        #expect(TickerText.loop(["", " \n "]) == "\(TickerText.fallback)\(TickerText.dot)")
+    }
+
+    @Test
+    func appendsDotToFallback() {
+        #expect(TickerText.loop(" \n ") == "\(TickerText.fallback)\(TickerText.dot)")
     }
 
     @Test
@@ -33,7 +69,12 @@ struct TickerTextTests {
     }
 
     @Test
+    func clampsRateHigh() {
+        #expect(TickerText.rate(9) == TickerText.rateRange.upperBound)
+    }
+
+    @Test
     func formatsRateText() {
-        #expect(TickerText.rateText(2.25) == "2x")
+        #expect(TickerText.rateText(1.25) == "1.25x")
     }
 }

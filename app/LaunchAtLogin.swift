@@ -1,13 +1,14 @@
 import Foundation
+import Observation
 import ServiceManagement
 
+@Observable
 @MainActor
-final class LaunchAtLogin: ObservableObject {
-    @Published private(set) var enabled = false
-    @Published private(set) var available = true
-    @Published private(set) var approval = false
-    @Published private(set) var error: String?
-    @Published private(set) var note: String?
+final class LaunchAtLogin {
+    private(set) var enabled = false
+    private(set) var approval = false
+    private(set) var error: String?
+    private(set) var note: String?
 
     private let service = SMAppService.mainApp
 
@@ -39,7 +40,6 @@ final class LaunchAtLogin: ObservableObject {
         if clearError {
             error = nil
         }
-        available = true
         approval = status == .requiresApproval
         enabled = status == .enabled || approval
         note = message(for: status)
