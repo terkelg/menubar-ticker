@@ -1,83 +1,89 @@
-import AppKit
 import SwiftUI
 import TickerCore
 
 struct TickerMenuView: View {
-    @ObservedObject var session: TickerSession
-    @ObservedObject var login: LaunchAtLogin
+    let session: TickerSession
+    let login: LaunchAtLogin
     @State private var text: String
     @State private var rate: Double
     @State private var launch: Bool
-    @FocusState private var focused: Bool
 
     init(session: TickerSession, login: LaunchAtLogin) {
         self.session = session
         self.login = login
-        _text = State(initialValue: session.text)
+        _text = State(initialValue: session.list.joined(separator: "\n"))
         _rate = State(initialValue: session.rate)
         _launch = State(initialValue: login.enabled)
     }
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
-            TextField("Type the sentence to loop in the menu bar", text: $text, axis: .vertical)
-                .textFieldStyle(.plain)
-                .font(.title3)
-                .lineLimit(3, reservesSpace: true)
-                .padding(12)
-                .background(.quaternary, in: RoundedRectangle(cornerRadius: 12))
-                .focused($focused)
-
-            VStack(alignment: .leading, spacing: 8) {
-                Slider(value: $rate, in: TickerText.rateRange, step: 0.1) {
-                    Text("Speed")
-                } minimumValueLabel: {
-                    Text(TickerText.rateText(TickerText.rateRange.lowerBound))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                } maximumValueLabel: {
-                    Text(TickerText.rateText(TickerText.rateRange.upperBound))
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                }
+            GroupBox {
+                NonWrappingTextEditor(text: $text, onFocusChange: setFocused)
+                    .frame(minHeight: 104)
+            } label: {
+                Text("One sentence per line")
+                    .font(.callout)
+                    .foregroundStyle(.secondary)
             }
 
-            VStack(alignment: .leading, spacing: 8) {
-                Toggle("Start on Login", isOn: $launch)
+            GroupBox("Playback") {
+                VStack(alignment: .leading, spacing: 8) {
+                    Slider(value: $rate, in: TickerText.rateRange, step: 0.1)
 
-                if login.approval {
-                    HStack(spacing: 8) {
-                        Text("Needs approval in System Settings.")
-                            .font(.caption)
+                    HStack(spacing: 0) {
+                        Text(TickerText.rateText(TickerText.rateRange.lowerBound))
+                            .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundStyle(.secondary)
 
-                        Button("Open Settings") {
-                            login.openSettings()
-                        }
-                        .buttonStyle(.link)
+                        Text(TickerText.rateText(TickerText.rateFallback))
+                            .frame(maxWidth: .infinity)
+                            .foregroundStyle(.secondary)
+
+                        Text(TickerText.rateText(TickerText.rateRange.upperBound))
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .foregroundStyle(.secondary)
                     }
-                } else if let error = login.error {
-                    Text(error)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
-                } else if let note = login.note {
-                    Text(note)
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    .font(.caption)
                 }
             }
 
-            Button("Quit") {
-                NSApp.terminate(nil)
+            GroupBox("General") {
+                VStack(alignment: .leading, spacing: 8) {
+                    Toggle("Start on Login", isOn: $launch)
+
+                    if login.approval {
+                        HStack(spacing: 8) {
+                            Text("Needs approval in System Settings")
+                                .font(.caption)
+                                .foregroundStyle(.secondary)
+
+                            Button("Open Settings", action: login.openSettings)
+                            .buttonStyle(.link)
+                        }
+                    } else if let error = login.error {
+                        Text(error)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    } else if let note = login.note {
+                        Text(note)
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
+                }
+                .frame(maxWidth: .infinity, alignment: .leading)
             }
+            .frame(maxWidth: .infinity, alignment: .leading)
+
+            Button("Quit", action: quit)
             .keyboardShortcut("q")
         }
         .padding(16)
-        .frame(width: 320, alignment: .leading)
+        .frame(width: 360, alignment: .leading)
         .onAppear { login.reload() }
-        .onDisappear { session.resume(.edit) }
+        .onDisappear(perform: finishEditing)
         .onChange(of: text) { _, value in
-            session.setText(value)
+            session.setList(lines(value))
         }
         .onChange(of: rate) { _, value in
             session.setRate(value)
@@ -88,13 +94,34 @@ struct TickerMenuView: View {
         .onChange(of: login.enabled) { _, value in
             launch = value
         }
-        .onChange(of: focused) { _, value in
-            if value {
-                session.pause(.edit)
-            } else {
-                session.resume(.edit)
-            }
+    }
+
+    private func lines(_ text: String) -> [String] {
+        text.split(whereSeparator: \.isNewline).map(String.init)
+    }
+
+    private func sync() {
+        let text = session.list.joined(separator: "\n")
+
+        guard self.text != text else { return }
+        self.text = text
+    }
+
+    private func finishEditing() {
+        session.resume(.edit)
+        sync()
+    }
+
+    private func setFocused(_ focused: Bool) {
+        if focused {
+            session.pause(.edit)
+        } else {
+            finishEditing()
         }
+    }
+
+    private func quit() {
+        NSApp.terminate(nil)
     }
 }
 

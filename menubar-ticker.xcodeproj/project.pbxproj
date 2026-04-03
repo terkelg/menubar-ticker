@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		083263834EF6DD9FA4261C3A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1EC7FCA6F46400E7FBF0B8C2 /* AppDelegate.swift */; };
 		154DEEC5A2B64E0E98225A06 /* StatusTickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62104E48AE1428C78926BB72 /* StatusTickerView.swift */; };
+		1B2C3D4E5F60718293A4B5C6 /* NonWrappingTextEditor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B2C3D4E5F60718293A4B5C7 /* NonWrappingTextEditor.swift */; };
 		2D0F42CD098B6113FCB4DD0D /* TickerMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20BD95AFFE4B75E5C4A4B816 /* TickerMenuView.swift */; };
 		343950D70C39530BFB880F9E /* TickerTextTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6101128EE3BD702858298B4C /* TickerTextTests.swift */; };
+		C1A2B3C4D5E6F7890A1B2C3D /* TickerSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1A2B3C4D5E6F7890A1B2C3E /* TickerSessionTests.swift */; };
 		3856FE69B5B0E89AE428EBCD /* TickerCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7852C89747F501D09449154 /* TickerCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		3B3C8CEACFA45F9E9998B5B7 /* MenubarTickerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B863C4F880A4D7C8ED6F0F3 /* MenubarTickerApp.swift */; };
 		3BE25B6A567CEA24A79B2DEF /* TickerCore.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = B7852C89747F501D09449154 /* TickerCore.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -39,6 +41,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 8ECC85A541053C6151BCDEC2;
 			remoteInfo = TickerCore;
+		};
+		F1A2B3C4D5E6F7890A1B2C3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = EB48B9EF0968D5A5E551A411 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 1AC73B92F0706FEBA9F7DA94;
+			remoteInfo = MenubarTicker;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -69,6 +78,7 @@
 
 /* Begin PBXFileReference section */
 		1EC7FCA6F46400E7FBF0B8C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		1B2C3D4E5F60718293A4B5C7 /* NonWrappingTextEditor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NonWrappingTextEditor.swift; sourceTree = "<group>"; };
 		20BD95AFFE4B75E5C4A4B816 /* TickerMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerMenuView.swift; sourceTree = "<group>"; };
 		4A8B2163F9AE379273537667 /* TickerSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSession.swift; sourceTree = "<group>"; };
 		5E76FC8EDA787B56B69E45D4 /* MenubarTicker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MenubarTicker.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -82,6 +92,7 @@
 		AF660A11A85B0F12FA144D96 /* LaunchAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLogin.swift; sourceTree = "<group>"; };
 		B3809B97AF8EB2486F92B57B /* TickerText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerText.swift; sourceTree = "<group>"; };
 		B7852C89747F501D09449154 /* TickerCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = TickerCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C1A2B3C4D5E6F7890A1B2C3E /* TickerSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TickerSessionTests.swift; sourceTree = "<group>"; };
 		F0FE0E8910869618F24D0E11 /* PassthroughHostingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PassthroughHostingView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +130,7 @@
 				1EC7FCA6F46400E7FBF0B8C2 /* AppDelegate.swift */,
 				AF660A11A85B0F12FA144D96 /* LaunchAtLogin.swift */,
 				7B863C4F880A4D7C8ED6F0F3 /* MenubarTickerApp.swift */,
+				1B2C3D4E5F60718293A4B5C7 /* NonWrappingTextEditor.swift */,
 				F0FE0E8910869618F24D0E11 /* PassthroughHostingView.swift */,
 				701982D2384A84F3ABD8F3F8 /* StatusItemController.swift */,
 				62104E48AE1428C78926BB72 /* StatusTickerView.swift */,
@@ -133,6 +145,7 @@
 		927EE082F466EB0E6A8CC205 /* tests */ = {
 			isa = PBXGroup;
 			children = (
+				C1A2B3C4D5E6F7890A1B2C3E /* TickerSessionTests.swift */,
 				6101128EE3BD702858298B4C /* TickerTextTests.swift */,
 			);
 			path = tests;
@@ -193,6 +206,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				F1A2B3C4D5E6F7890A1B2C3E /* PBXTargetDependency */,
 				C8124EB3E5A8C3FE02A18189 /* PBXTargetDependency */,
 			);
 			name = MenubarTickerTests;
@@ -273,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C1A2B3C4D5E6F7890A1B2C3D /* TickerSessionTests.swift in Sources */,
 				343950D70C39530BFB880F9E /* TickerTextTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -284,6 +299,7 @@
 				083263834EF6DD9FA4261C3A /* AppDelegate.swift in Sources */,
 				5A538BC243FAF66E035FAEF4 /* LaunchAtLogin.swift in Sources */,
 				3B3C8CEACFA45F9E9998B5B7 /* MenubarTickerApp.swift in Sources */,
+				1B2C3D4E5F60718293A4B5C6 /* NonWrappingTextEditor.swift in Sources */,
 				7FDD6A542CE6C622D86E2EE7 /* PassthroughHostingView.swift in Sources */,
 				7559414CB2A1F89015C38AC7 /* StatusItemController.swift in Sources */,
 				154DEEC5A2B64E0E98225A06 /* StatusTickerView.swift in Sources */,
@@ -305,6 +321,11 @@
 			isa = PBXTargetDependency;
 			target = 8ECC85A541053C6151BCDEC2 /* TickerCore */;
 			targetProxy = 7A2E0900773A785A100A0C56 /* PBXContainerItemProxy */;
+		};
+		F1A2B3C4D5E6F7890A1B2C3E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 1AC73B92F0706FEBA9F7DA94 /* MenubarTicker */;
+			targetProxy = F1A2B3C4D5E6F7890A1B2C3D /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -379,6 +400,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.terkel.menubar-ticker.tests";
 				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MenubarTicker.app/Contents/MacOS/MenubarTicker";
 			};
 			name = Release;
 		};
@@ -388,7 +410,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
 				CODE_SIGNING_ALLOWED = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				ENABLE_DEBUG_DYLIB = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
@@ -396,7 +418,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.terkel.menubar-ticker";
 				PRODUCT_NAME = MenubarTicker;
 				SDKROOT = macosx;
@@ -409,7 +431,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -433,7 +455,7 @@
 			buildSettings = {
 				CODE_SIGN_IDENTITY = "";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEFINES_MODULE = YES;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
@@ -529,6 +551,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.terkel.menubar-ticker.tests";
 				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MenubarTicker.app/Contents/MacOS/MenubarTicker";
 			};
 			name = Debug;
 		};
@@ -538,14 +561,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = icon;
 				CODE_SIGNING_ALLOWED = NO;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_LSUIElement = YES;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.terkel.menubar-ticker";
 				PRODUCT_NAME = MenubarTicker;
 				SDKROOT = macosx;

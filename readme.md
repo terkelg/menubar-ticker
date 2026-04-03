@@ -1,6 +1,6 @@
 # menubar-ticker
 
-> A macOS menu bar ticker that loops a custom sentence forever.
+> A macOS menu bar ticker that loops custom sentences forever.
 
 ![MenubarTicker screenshot](assets/menubar-ticker-screenshot.png)
 
@@ -56,5 +56,5 @@ This release path uses a local Apple Development certificate. It is not a notari
 ## Notes
 
 - The app runs as an `LSUIElement` menu bar app.
-- The ticker text and speed are persisted in `UserDefaults`.
+- The ticker sentences and speed are persisted in `UserDefaults`.
 - `Start on Login` uses `SMAppService.mainApp`.
