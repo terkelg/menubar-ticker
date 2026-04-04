@@ -37,3 +37,19 @@ struct TickerSessionTests {
         return (name, defaults)
     }
 }
+
+struct PopoverEventTests {
+    @Test
+    func keepsClicksInsidePopover() {
+        let frame = CGRect(x: 10, y: 20, width: 120, height: 80)
+
+        #expect(PopoverEvent.shouldClose(at: CGPoint(x: 50, y: 50), in: frame) == false)
+    }
+
+    @Test
+    func closesClicksOutsidePopover() {
+        let frame = CGRect(x: 10, y: 20, width: 120, height: 80)
+
+        #expect(PopoverEvent.shouldClose(at: CGPoint(x: 5, y: 50), in: frame))
+    }
+}

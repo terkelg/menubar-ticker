@@ -4,13 +4,15 @@ import TickerCore
 struct TickerMenuView: View {
     let session: TickerSession
     let login: LaunchAtLogin
+    let close: () -> Void
     @State private var text: String
     @State private var rate: Double
     @State private var launch: Bool
 
-    init(session: TickerSession, login: LaunchAtLogin) {
+    init(session: TickerSession, login: LaunchAtLogin, close: @escaping () -> Void) {
         self.session = session
         self.login = login
+        self.close = close
         _text = State(initialValue: session.list.joined(separator: "\n"))
         _rate = State(initialValue: session.rate)
         _launch = State(initialValue: login.enabled)
@@ -75,8 +77,14 @@ struct TickerMenuView: View {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
 
-            Button("Quit", action: quit)
-            .keyboardShortcut("q")
+            HStack(spacing: 8) {
+                Button("Close", action: close)
+
+                Spacer(minLength: 0)
+
+                Button("Quit", action: quit)
+                    .keyboardShortcut("q")
+            }
         }
         .padding(16)
         .frame(width: 360, alignment: .leading)
@@ -126,5 +134,5 @@ struct TickerMenuView: View {
 }
 
 #Preview("Popover") {
-    TickerMenuView(session: TickerSession(), login: LaunchAtLogin())
+    TickerMenuView(session: TickerSession(), login: LaunchAtLogin(), close: {})
 }
